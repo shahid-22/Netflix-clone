@@ -6,7 +6,9 @@
     padding: 20px;
     display: flex;
     justify-content: space-between;
-    background-color: black;
+    /* background-color: black; */
+    /* position: sticky; */
+    /* top: 0; */
    
 }
 

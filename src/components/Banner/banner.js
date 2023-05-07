@@ -1,21 +1,32 @@
-import React from 'react'
-import "./banner.css"
+import React, { useEffect, useState } from 'react';
+import "./Banner.css";
+import axios from '../../axios';
+import { API_KEY,imageUrl } from '../../constants/constants';
 
-function banner() {
-  return (
-    <div className='banner'>
-        <div className='content'>
-            <h1 className='title'>movie</h1>
-            <div className="banner_buttons">
-                <button className='button'>play</button>
-                <button className='button'>My list</button>
+function Banner() {
+    const [movie,setmovie]=useState()
+    useEffect(() => {
+        axios.get(`https://api.themoviedb.org/3/trending/all/week?api_key=${API_KEY}`).then((response) => {
+            console.log(response.data.results[0]);
+            setmovie(response.data.results[Math.floor(Math.random() * response.data.results.length-1)])
+            return response
+        })
+    },[]);
+    return (
+        <div 
+        style={{backgroundImage:`url(${ movie ?imageUrl+movie.backdrop_path :""})`}}
+         className='banner'>
+            <div className='content'>
+                <h1 className='title'>{movie ?movie.title:""}</h1>
+                <div className="banner_buttons">
+                    <button className='button'>play</button>
+                    <button className='button'>My list</button>
+                </div>
+                <h1 className='description'>{movie?movie.overview:""}</h1>
             </div>
-            <h1 className='description'>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book</h1>
-
+            <div className="fade_bottom"></div>
         </div>
-      <div className="fade_bottom"></div>
-    </div>
-  )
+    );
 }
 
-export default banner
+export default Banner;
