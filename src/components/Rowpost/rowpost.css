@@ -18,5 +18,12 @@
 .poster{
     max-height: 250px;
     margin-right: 10px;
+    cursor: pointer;
+    margin-left: 25px;
 
+}
+.smallerpost{
+    max-height: 135px;
+    margin-right: 10px;
+    cursor: pointer;
 }
